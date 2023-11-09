@@ -1,6 +1,6 @@
 html, body{
   text-align: center;
-  background-color: rgb(31, 31, 31);
+  background-color: rgb(36, 36, 36);
   height:100%;
   margin: 0;
   display: flex;
@@ -10,8 +10,8 @@ html, body{
 #div1{
   height: 80px;
   width: 100%;
-  background-color: black;
-  color: grey;
+  background-color: rgb(27, 27, 27);
+  color: white;
   justify-content: center;
   align-content: center;
 }
@@ -19,12 +19,21 @@ html, body{
 #div2{
   height:100%;
   width: 100%;
-  background-color: rgb(44, 44, 44)
+  background-color: rgb(36, 36, 36);
+  color: white;
 }
 
 .question {
   margin: 20px;
   color: white;
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
+.text {position: absolute;
+  margin: 50px;
+  color: white;
+  font-size: 30px;
 }
 
 .options {
