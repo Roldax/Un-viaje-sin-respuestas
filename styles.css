@@ -1,0 +1,52 @@
+html, body{
+  text-align: center;
+  background-color: rgb(31, 31, 31);
+  height:100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#div1{
+  height: 80px;
+  width: 100%;
+  background-color: black;
+  color: grey;
+  justify-content: center;
+  align-content: center;
+}
+
+#div2{
+  height:100%;
+  width: 100%;
+  background-color: rgb(44, 44, 44)
+}
+
+.question {
+  margin: 20px;
+  color: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option {
+  margin: 20px;
+}
+
+.result {
+  display: none;
+  margin: 20px;
+}
+
+#playAgain {
+  display: none;
+  margin: 10px;
+}
+
+img {
+  margin-top: 20px;
+}

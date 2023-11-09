@@ -1,0 +1,13 @@
+1. Análisis
+
+ Una página web que, cuando cargue, muestre una pregunta al usuario con 4 opciones.  El usuario escogerá una opción y, tras ello, el programa indicará si es la respuesta es correcta y, en todo caso, mostrará la respuesta correcta.  La pregunta se escogerá al azar entre una batería de preguntas.
+
+2. Diseño
+
+El usuario abre la página web, se le muestra en pantalla una pregunta con cuatro posibles respuestas, el usuario lee la pregunta y elige la respuesta que considera como correcta, se muestra la respuesta correcta, si es correcta se vuelve a mostrar otra pregunta de mayor dificultad y se vuelve a repetir el proceso hasta llegar a 10 correctas que es como se termina.
+
+
+
+3. Implementación
+
+4. Prueba
