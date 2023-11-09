@@ -30,7 +30,8 @@ html, body{
   margin-right: 500px;
 }
 
-.text {position: absolute;
+.text {
+  position: absolute;
   margin: 50px;
   color: white;
   font-size: 30px;
@@ -57,5 +58,7 @@ html, body{
 }
 
 img {
-  margin-top: 20px;
+  
+  margin-top:100px;
+  margin-bottom: 100px;
 }
