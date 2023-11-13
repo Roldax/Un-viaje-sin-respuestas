@@ -1,6 +1,6 @@
 html, body{
   text-align: center;
-  background-color: rgb(36, 36, 36);
+  background-color:  rgb(36, 36, 36);
   height:100%;
   margin: 0;
   display: flex;
@@ -11,7 +11,7 @@ html, body{
 #div1{
   height: 80px;
   width: 100%;
-  background: linear-gradient(rgb(37,40,80), rgb(36, 36, 36));
+  background-color: rgb(27, 27, 27);
   color: white;
   justify-content: center;
   align-content: center;
@@ -20,7 +20,10 @@ html, body{
 #div2{
   height:100%;
   width: 100%;
-  background-color: rgb(36, 36, 36);
+  background-image: url( "./fotos/neptuno.jpg" );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   color: white;
 }
 
