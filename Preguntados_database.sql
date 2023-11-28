@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS Preguntados;
-Use Preguntados;
+CREATE DATABASE IF NOT EXISTS viaje_respuestas;
+Use viaje_respuestas;
 
 CREATE TABLE Preguntas_Facil (
     ID INT PRIMARY KEY AUTO_INCREMENT,

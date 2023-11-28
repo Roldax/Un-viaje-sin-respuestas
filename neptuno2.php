@@ -8,8 +8,8 @@
 
 <?php
 $host = 'localhost';
-$db   = 'preguntados';
-$user = 'administrador';
+$db   = 'viaje_respuestas';
+$user = 'root';
 $pass = 'password';
 
 // Create connection
@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 
 // Fetch a question from the database (you need to implement this part)
 // For now, I'll use a sample question.
-$question = "¿Cuál es la capital de Francia?";
+$question = "Hola como estas";
 $options = ["a) Madrid", "b) Roma", "c) París", "d) Londres"];
 $correctAnswer = "c) París";
 ?>
