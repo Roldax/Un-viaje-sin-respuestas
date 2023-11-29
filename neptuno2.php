@@ -12,20 +12,40 @@ $db   = 'viaje_respuestas';
 $user = 'root';
 $pass = 'password';
 
-// Create connection
+// Creo una conexión
 $conn = new mysqli($host, $user, $pass, $db);
 
-// Check connection
+// Compruebo la conexión
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch a question from the database (you need to implement this part)
-// For now, I'll use a sample question.
-$question = "Hola como estas";
-$options = ["a) Madrid", "b) Roma", "c) París", "d) Londres"];
-$correctAnswer = "c) París";
+// Escojo una pregunta aleatoria de la base de datos
+$sql = "SELECT Enunciado, Opcion1, Opcion2, Opcion3, Opcion4, OpcionCorrecta FROM Preguntas_Facil ORDER BY RAND() LIMIT 1";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Obtengo el primer resultado (debería haber solo uno)
+    $row = $result->fetch_assoc();
+    $question = $row['Enunciado'];
+    
+    // Obtener opciones
+    $options = [
+        "a) " . $row['Opcion1'],
+        "b) " . $row['Opcion2'],
+        "c) " . $row['Opcion3'],
+        "d) " . $row['Opcion4']
+    ];
+
+    $correctAnswer = $row['OpcionCorrecta'];
+} else {
+    $question = "No hay preguntas disponibles.";
+    $options = [];
+    $correctAnswer = "";
+}
 ?>
+
+
 
 <div id="div1">
     <h1>NEPTUNO</h1>
