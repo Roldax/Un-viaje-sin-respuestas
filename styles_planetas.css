@@ -11,7 +11,7 @@ html, body {
   height: 80px;
   width: 100%;
   background-color: rgb(27, 27, 27);
-  color: white;
+  color: rgb(248, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +50,7 @@ html, body {
 }
 
 .result {
-  display: none;
+ 
   margin: 20px;
 }
 

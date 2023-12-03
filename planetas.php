@@ -60,19 +60,19 @@ if ($result->num_rows > 0) {
 
     <div class="options">
         <?php
-        // Display options
+        // Mostrar las opciones
         foreach ($options as $option) {
             echo '<button class="option">' . $option . '</button>';
         }
         ?>
     </div>
 
-    <div class="result">
-        <p>Tu respuesta es <span id="result">incorrecta</span>.</p>
-        <p>La respuesta correcta es: <span id="correctAnswer"><?php echo $correctAnswer; ?></span>.</p>
+    <div>
+        <p>Tu respuesta es incorrecta.</p>
+        <p>La respuesta correcta es: <?php echo $correctAnswer; ?>.</p>
     </div>
 
-    <button id="playAgain">Jugar Nuevamente</button>
+    <button>Jugar Nuevamente</button>
 </div>
 
 </body>
