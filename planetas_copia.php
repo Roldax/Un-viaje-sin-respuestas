@@ -3,17 +3,6 @@
 <head>
   <title>NEPTUNO</title>
   <link rel="stylesheet" type="text/css" href="styles_planetas.css">
-  <script>
-    function showAnswer() {
-      // Muestra el div con id "answerDiv"
-      document.getElementById("answerDiv").style.display = "block";
-    }
-  </script>
-  <style>
-    #answerDiv {
-      display: none; /* Inicialmente oculto */
-    }
-  </style>
 </head>
 <body>
 
@@ -56,6 +45,8 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+
+
 <div id="div1">
     <h1>NEPTUNO</h1>
 </div>
@@ -71,13 +62,12 @@ if ($result->num_rows > 0) {
         <?php
         // Mostrar las opciones
         foreach ($options as $option) {
-            // Agregar un evento onclick para llamar a la función showAnswer
-            echo '<button class="option" onclick="showAnswer()">' . $option . '</button>';
+            echo '<button class="option">' . $option . '</button>';
         }
         ?>
     </div>
 
-    <div id="answerDiv">
+    <div>
         <p>La respuesta correcta es: <?php echo $correctAnswer; ?>.</p>
         <p>Tu respuesta es incorrecta.</p>
     </div>
