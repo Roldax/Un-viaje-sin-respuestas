@@ -4,13 +4,24 @@
   <title>NEPTUNO</title>
   <link rel="stylesheet" type="text/css" href="styles_planetas.css">
   <script>
-    function showAnswer() {
-      // Muestra el div con id "answerDiv"
-      document.getElementById("answerDiv").style.display = "block";
+
+    function showIncorrectAnswer() {
+      // Muestra el div con id "incorrectAnswerdiv"
+      document.getElementById("incorrectAnswerdiv").style.display = "block";
     }
+
+    function showCorrectAnswer() {
+      // Muestra el div con id "correctAnswerdiv"
+      document.getElementById("correctAnswerdiv").style.display = "block";
+    }
+    
   </script>
   <style>
-    #answerDiv {
+    #correctAnswerdiv {
+      display: none; /* Inicialmente oculto */
+    }
+
+    #incorrectAnswerdiv {
       display: none; /* Inicialmente oculto */
     }
   </style>
@@ -72,15 +83,19 @@ if ($result->num_rows > 0) {
         // Mostrar las opciones
         foreach ($options as $option) {
             // Agregar un evento onclick para llamar a la función showAnswer
-            echo '<button class="option" onclick="showAnswer()">' . $option . '</button>';
+            echo '<button class="option" onclick="showIncorrectAnswer()">' . $option . '</button>';
         }
         ?>
     </div>
 
-    <div id="answerDiv">
-        <p>La respuesta correcta es: <?php echo $correctAnswer; ?>.</p>
-        <p>Tu respuesta es incorrecta.</p>
+    <div id="correctAnswerdiv">
+     <p>Tu respuesta es correcta.</p>
     </div>
+
+    <div id="incorrectAnswerdiv">
+     <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
+    </div>
+
 
     <button>Jugar Nuevamente</button>
 </div>
