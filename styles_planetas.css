@@ -7,17 +7,29 @@ html, body {
   flex-direction: column;
 }
 
-#div1 {
-  height: 80px;
+#correctAnswerdiv {
+  display: none; /* Inicialmente oculto */
+  font-size: 40px;
+}
+
+#incorrectAnswerdiv {
+  display: none; /* Inicialmente oculto */
+  font-size: 40px;
+}
+
+header {
+  height: 100px;
   width: 100%;
-  background-color: rgb(27, 27, 27);
-  color: rgb(248, 0, 0);
+  color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 30px;
+  border-radius: 20px;
 }
 
-#div2 {
+main {
   height: 100%;
   width: 100%;
   background-image: url("./fotos/neptuno.jpg");
@@ -32,6 +44,7 @@ html, body {
 
 .question {
   margin: 20px;
+  font-size: 40px;
 }
 
 .text {
@@ -41,12 +54,23 @@ html, body {
 
 .options {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .option {
-  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 100px; /* Ajusta el margen según tu diseño */
+  color: rgb(255, 255, 255); /* Texto blanco para contrastar con el fondo negro */
+  background-color: rgba(0, 0, 0, 0.6); /* Negro con 70% de opacidad */
+  border: none;
+  cursor: pointer;
+  width: calc(50% - 200px); /* Ajusta el ancho según tu diseño y margen */
+  height: 150px; /* Ajusta la altura según tu diseño */
+  font-size: 3em; /* Utilizando em para que se adapte al tamaño del botón */
+  border-radius: 20px;
 }
 
 .result {

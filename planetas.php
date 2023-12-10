@@ -3,28 +3,7 @@
 <head>
   <title>NEPTUNO</title>
   <link rel="stylesheet" type="text/css" href="styles_planetas.css">
-  <script>
 
-    function showIncorrectAnswer() {
-      // Muestra el div con id "incorrectAnswerdiv"
-      document.getElementById("incorrectAnswerdiv").style.display = "block";
-    }
-
-    function showCorrectAnswer() {
-      // Muestra el div con id "correctAnswerdiv"
-      document.getElementById("correctAnswerdiv").style.display = "block";
-    }
-    
-  </script>
-  <style>
-    #correctAnswerdiv {
-      display: none; /* Inicialmente oculto */
-    }
-
-    #incorrectAnswerdiv {
-      display: none; /* Inicialmente oculto */
-    }
-  </style>
 </head>
 <body>
 
@@ -42,8 +21,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Inicializamos la variable para rastrear si el usuario ha respondido
+$userAnswered = false;
+
 // Escojo una pregunta aleatoria de la base de datos
-$sql = "SELECT Enunciado, Opcion1, Opcion2, Opcion3, Opcion4, OpcionCorrecta FROM Preguntas_Facil ORDER BY RAND() LIMIT 1";
+$sql = "SELECT Enunciado, Opcion1, Opcion2, Opcion3, Opcion4, OpcionCorrecta FROM Preguntas_Dificil ORDER BY RAND() LIMIT 1";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -67,11 +49,10 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-<div id="div1">
-    <h1>NEPTUNO</h1>
-</div>
-
-<div id="div2">
+<main>
+  <header>
+      <h1>NEPTUNO</h1>
+  </header>
 
     <div class="question">
         <h1>Pregunta:</h1>
@@ -85,24 +66,46 @@ if ($result->num_rows > 0) {
         $isCorrect = (strpos($options[$i], $correctAnswer) !== false);
         $onClickFunction = $isCorrect ? 'showCorrectAnswer()' : 'showIncorrectAnswer()';
         
-        echo '<button class="option" onclick="' . $onClickFunction . '">' . $options[$i] . '</button>';
+        // Agregar la condición para deshabilitar el botón si el usuario ya respondió
+        echo '<button class="option" onclick="' . $onClickFunction . '" ' . ($userAnswered ? 'disabled' : '') . '>' . $options[$i] . '</button>';
     }
     ?>
-</div>
-
-
-
-    <div id="correctAnswerdiv">
-     <p>Tu respuesta es correcta.</p>
     </div>
 
-    <div id="incorrectAnswerdiv">
-     <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
-    </div>
+    <p id="correctAnswerdiv">Tu respuesta es correcta.</p>
+   
+    <p id="incorrectAnswerdiv">Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
+  
+    <button onclick="resetGame()">Jugar Nuevamente</button>
+
+  </main>
+
+<script>
+    function showIncorrectAnswer() {
+        document.getElementById("correctAnswerdiv").style.display = "none";
+        document.getElementById("incorrectAnswerdiv").style.display = "block";
+        disableButtons();
+    }
+
+    function showCorrectAnswer() {
+        document.getElementById("incorrectAnswerdiv").style.display = "none";
+        document.getElementById("correctAnswerdiv").style.display = "block";
+        disableButtons();
+    }
+
+    function disableButtons() {
+        var buttons = document.getElementsByClassName("option");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+        
+        // Actualizar la variable para rastrear si el usuario ha respondido
+        <?php echo $userAnswered = true; ?>;
+    }
 
 
-    <button>Jugar Nuevamente</button>
-</div>
+</script>
 
 </body>
 </html>
+
