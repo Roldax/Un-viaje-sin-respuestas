@@ -78,15 +78,32 @@ if ($result->num_rows > 0) {
         <p><?php echo $question; ?></p>
     </div>
 
+
+
+
+    
     <div class="options">
-        <?php
-        // Mostrar las opciones
-        foreach ($options as $option) {
-            // Agregar un evento onclick para llamar a la función showAnswer
-            echo '<button class="option" onclick="showIncorrectAnswer()">' . $option . '</button>';
-        }
-        ?>
-    </div>
+    <?php
+    for ($i = 0; $i < count($options); $i++) {
+        // Utilizar trim para eliminar espacios en blanco alrededor de las respuestas
+        $cleanCorrectAnswer = trim($correctAnswer);
+        $cleanSelectedAnswer = trim($options[$i]);
+    ?>
+        <!-- Agregar un evento onclick con un condicional if -->
+        <button class="option" onclick="<?php
+                                        if ($cleanSelectedAnswer === $cleanCorrectAnswer) {
+                                            echo 'showCorrectAnswer()';
+                                        } else {
+                                            echo 'showIncorrectAnswer()';
+                                        }
+                                        ?>"><?php echo $options[$i]; ?></button>
+    <?php
+    }
+    ?>
+</div>
+
+
+
 
     <div id="correctAnswerdiv">
      <p>Tu respuesta es correcta.</p>
@@ -96,8 +113,10 @@ if ($result->num_rows > 0) {
      <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
     </div>
 
+    <div class="siguiente">
+      <button>Jugar Nuevamente</button>
+    </div>
 
-    <button>Jugar Nuevamente</button>
 </div>
 
 </body>

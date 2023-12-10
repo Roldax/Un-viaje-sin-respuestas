@@ -50,16 +50,11 @@ html, body {
 }
 
 .result {
- 
   margin: 20px;
 }
 
-#playAgain {
-  display: none;
-  margin: 10px;
-}
 
-img {
+.img {
   margin-top: 50px;
   margin-bottom: 50px;
 }
