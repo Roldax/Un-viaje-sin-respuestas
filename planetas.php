@@ -1,62 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEPTUNO</title>
   <link rel="stylesheet" type="text/css" href="styles_planetas.css">
-
+  <style>
+    body {
+        background-size: cover;
+        margin: 0;
+        height: 100%;
+        color: green;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  </style>
 </head>
 <body>
 
 <?php
-$host = 'localhost';
-$db   = 'viaje_respuestas';
-$user = 'root';
-$pass = 'password';
+    $planets = array("neptuno.jpg", "urano.jpg", "saturno.jpg", "jupiter.jpg", "marte.jpg", "tierra.jpg");
 
-// Creo una conexión
-$conn = new mysqli($host, $user, $pass, $db);
+    // Verifica si hay un parámetro 'planet' en la URL y establece la imagen de fondo en consecuencia
+    $planetParam = isset($_GET['planet']) ? $_GET['planet'] : $planets[0];
 
-// Compruebo la conexión
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Asocia nombres de planetas con títulos
+    $planetTitles = array(
+        "neptuno.jpg" => "Neptuno",
+        "urano.jpg" => "Urano",
+        "saturno.jpg" => "Saturno",
+        "jupiter.jpg" => "Júpiter",
+        "marte.jpg" => "Marte",
+        "tierra.jpg" => "Tierra"
+    );
 
-// Inicializamos la variable para rastrear si el usuario ha respondido
-$userAnswered = false;
+    // Obtiene el título actual
+    $currentTitle = $planetTitles[$planetParam];
 
-// Escojo una pregunta aleatoria de la base de datos
-$sql = "SELECT Enunciado, Opcion1, Opcion2, Opcion3, Opcion4, OpcionCorrecta FROM Preguntas_Dificil ORDER BY RAND() LIMIT 1";
-$result = $conn->query($sql);
+    // Asocia nombres de planetas con niveles de dificultad
+    $planetDifficulty = array(
+        "neptuno.jpg" => "Preguntas_Facil",
+        "urano.jpg" => "Preguntas_Facil",
+        "saturno.jpg" => "Preguntas_Medio",
+        "jupiter.jpg" => "Preguntas_Medio",
+        "marte.jpg" => "Preguntas_Dificil",
+        "tierra.jpg" => "Preguntas_Dificil"
+    );
 
-if ($result->num_rows > 0) {
-    // Obtengo el primer resultado (debería haber solo uno)
-    $row = $result->fetch_assoc();
-    $question = $row['Enunciado'];
-    
-    // Obtener opciones
-    $options = [
-        "a) " . $row['Opcion1'],
-        "b) " . $row['Opcion2'],
-        "c) " . $row['Opcion3'],
-        "d) " . $row['Opcion4']
-    ];
+    // Obtiene el nivel de dificultad actual
+    $currentDifficulty = $planetDifficulty[$planetParam];
 
-    $correctAnswer = $row['OpcionCorrecta'];
-} else {
-    $question = "No hay preguntas disponibles.";
-    $options = [];
-    $correctAnswer = "";
-}
+    // Selecciona preguntas aleatorias del nivel de dificultad actual
+    $host = 'localhost';
+    $db   = 'viaje_respuestas';
+    $user = 'root';
+    $pass = 'password';
+
+    // Creo una conexión
+    $conn = new mysqli($host, $user, $pass, $db);
+
+    // Compruebo la conexión
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Inicializamos la variable para rastrear si el usuario ha respondido
+    $userAnswered = false;
+
+    // Escojo una pregunta aleatoria de la base de datos del nivel de dificultad actual
+    $sql = "SELECT Enunciado, Opcion1, Opcion2, Opcion3, Opcion4, OpcionCorrecta FROM $currentDifficulty ORDER BY RAND() LIMIT 1";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Obtengo el primer resultado (debería haber solo uno)
+        $row = $result->fetch_assoc();
+        $question = $row['Enunciado'];
+
+        // Obtener opciones
+        $options = [
+            "a) " . $row['Opcion1'],
+            "b) " . $row['Opcion2'],
+            "c) " . $row['Opcion3'],
+            "d) " . $row['Opcion4']
+        ];
+
+        $correctAnswer = $row['OpcionCorrecta'];
+    } else {
+        $question = "No hay preguntas disponibles.";
+        $options = [];
+        $correctAnswer = "";
+    }
 ?>
 
 <main>
   <header>
-      <h1>NEPTUNO</h1>
+    <h1 id="planetTitle">Neptuno</h1>
   </header>
 
     <div class="question">
         <h1>Pregunta:</h1>
         <p><?php echo $question; ?></p>
+        <p id="planetDifficulty"></p>
     </div>
 
     <div class="options">
@@ -72,15 +117,46 @@ if ($result->num_rows > 0) {
     ?>
     </div>
 
-    <p id="correctAnswerdiv">Tu respuesta es correcta.</p>
-   
-    <p id="incorrectAnswerdiv">Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
-  
-    <button onclick="resetGame()">Jugar Nuevamente</button>
-
+    <div id="correctAnswerdiv">
+        <p>Tu respuesta es correcta.</p>
+        <button onclick="nextPlanet()">Siguiente Planeta</button>
+    </div>
+    <div id="incorrectAnswerdiv">
+        <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
+        <button>Jugar Nuevamente</button>
+    </div>
   </main>
 
 <script>
+
+ // Función para redirigir a la misma página con la nueva imagen de fondo y preguntas
+ function nextPlanet() {
+    var planets = <?php echo json_encode($planets); ?>;
+    var currentPlanet = "<?php echo $planetParam; ?>";
+
+    // Encuentra el índice actual en el array
+    var currentIndex = planets.indexOf(currentPlanet);
+
+    // Incrementa el índice y asegúrate de no exceder el límite del array
+    currentIndex = (currentIndex + 1) % planets.length;
+
+    var nextPlanetImage = planets[currentIndex];
+    var nextTitle = "<?php echo $planetTitles[$planetParam]; ?>";
+    var nextDifficulty = "<?php echo $planetDifficulty[$planetParam]; ?>";
+    var nextPageURL = window.location.href.split('?')[0]; // Obtén la URL actual sin parámetros
+    window.location.href = nextPageURL + "?planet=" + nextPlanetImage + "&title=" + encodeURIComponent(nextTitle) + "&difficulty=" + nextDifficulty;
+  }
+
+  // Establece la imagen de fondo y el título según el parámetro 'planet' en la URL
+  document.body.style.backgroundImage = 'url("./fotos/<?php echo $planetParam; ?>")';
+  document.title = "<?php echo $currentTitle; ?>";
+  document.getElementById("planetTitle").innerText = "<?php echo $currentTitle; ?>";
+
+  // También podrías mostrar el nivel de dificultad actual en tu interfaz si lo deseas
+  var currentDifficulty = "<?php echo $currentDifficulty; ?>";
+  document.getElementById("planetDifficulty").innerText = "Nivel de dificultad: " + currentDifficulty;
+
+
     function showIncorrectAnswer() {
         document.getElementById("correctAnswerdiv").style.display = "none";
         document.getElementById("incorrectAnswerdiv").style.display = "block";
@@ -103,6 +179,7 @@ if ($result->num_rows > 0) {
         <?php echo $userAnswered = true; ?>;
     }
 
+    
 
 </script>
 
