@@ -1,103 +1,77 @@
-html, body{
+html,
+body {
   text-align: center;
-  background-color: rgb(36, 36, 36);
-  height:100%;
+  background-image: url("./fotos/spaceship.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
-}
-
-nav {
-  position:absolute;
-  float: left;
-  z-index: 10;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 0 5%;
-  height: 100px;
-}
-
-nav.list {
-  float: right;
-  padding: 0;
-  margin: 0;
-  width: 60%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
-nav .list li {
-  list-style: none;
-}
 
-nav .list a {
-  display: block;
-  text-transform: uppercase;
-  padding: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
 
-nav .list a:hover{
-  border-bottom: 4px solid rgb(37,40,80);
-}
-
-#div1{
-  height: 80px;
-  width: 100%;
-  background: linear-gradient(rgb(37,40,80), rgb(36, 36, 36));
-  color: white;
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-content: center;
-}
-
-#div2{
-  margin-top: 50px;
-  height:100%;
-  width: 100%;
-  background-color: rgb(36, 36, 36);
+  margin-top: 20px;
+  font-size: 80px;
+  background-color: rgba(128, 126, 126, 0.6);
+  /* Usé rgba para especificar la opacidad */
   color: white;
 }
 
-.question {
-  margin: 20px;
-  color: white;
-  margin-left: 500px;
-  margin-right: 500px;
+a,
+button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  margin-bottom: 500px;
+}
+
+button {
+  border: 0;
+  background-image: linear-gradient(150deg, #9500ff, #09f, #00DDFF);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  padding: 4px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button span {
+  background-color: #111;
+  padding: 16px 24px;
+  border-radius: 6px;
+  transition: .3s;
+
+}
+
+button:hover span {
+  background: none;
+}
+
+button:active {
+  transform: scale(0.9);
 }
 
 .text {
-  position: absolute;
-  margin: 50px;
-  color: white;
-  font-size: 30px;
-}
-
-.options {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.option {
-  margin: 20px;
-}
-
-.result {
-  display: none;
-  margin: 20px;
-}
-
-#playAgain {
-  display: none;
-  margin: 10px;
-}
-
-img {
-  
-  margin-top:100px;
-  margin-bottom: 100px;
+  justify-content: center;
+  margin-top: 10px;
+  height: 100%;
+  font-size: 45px;
+  color: white;
 }

@@ -6,15 +6,7 @@
   <title>NEPTUNO</title>
   <link rel="stylesheet" type="text/css" href="styles_planetas.css">
   <style>
-    body {
-        background-size: cover;
-        margin: 0;
-        height: 100%;
-        color: green;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+
   </style>
 </head>
 <body>
@@ -119,43 +111,46 @@
 
     <div id="correctAnswerdiv">
         <p>Tu respuesta es correcta.</p>
-        <button onclick="nextPlanet()">Siguiente Planeta</button>
+        <button id="correct" onclick="nextPlanet()">Siguiente Planeta</button>
     </div>
     <div id="incorrectAnswerdiv">
         <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
-        <button>Jugar Nuevamente</button>
+        <button id="incorrect" onclick="playAgain()">Jugar Nuevamente</button>
     </div>
   </main>
 
 <script>
 
- // Función para redirigir a la misma página con la nueva imagen de fondo y preguntas
- function nextPlanet() {
-    var planets = <?php echo json_encode($planets); ?>;
-    var currentPlanet = "<?php echo $planetParam; ?>";
+    // Función para redirigir a la misma página con la nueva imagen de fondo y preguntas
+    function nextPlanet() {
+        var planets = <?php echo json_encode($planets); ?>;
+        var currentPlanet = "<?php echo $planetParam; ?>";
 
-    // Encuentra el índice actual en el array
-    var currentIndex = planets.indexOf(currentPlanet);
+        // Encuentra el índice actual en el array
+        var currentIndex = planets.indexOf(currentPlanet);
 
-    // Incrementa el índice y asegúrate de no exceder el límite del array
-    currentIndex = (currentIndex + 1) % planets.length;
+        // Incrementa el índice y asegúrate de no exceder el límite del array
+        currentIndex = (currentIndex + 1) % planets.length;
 
-    var nextPlanetImage = planets[currentIndex];
-    var nextTitle = "<?php echo $planetTitles[$planetParam]; ?>";
-    var nextDifficulty = "<?php echo $planetDifficulty[$planetParam]; ?>";
-    var nextPageURL = window.location.href.split('?')[0]; // Obtén la URL actual sin parámetros
-    window.location.href = nextPageURL + "?planet=" + nextPlanetImage + "&title=" + encodeURIComponent(nextTitle) + "&difficulty=" + nextDifficulty;
+        var nextPlanetImage = planets[currentIndex];
+        var nextTitle = "<?php echo $planetTitles[$planetParam]; ?>";
+        var nextDifficulty = "<?php echo $planetDifficulty[$planetParam]; ?>";
+        var nextPageURL = window.location.href.split('?')[0]; // Obtén la URL actual sin parámetros
+        window.location.href = nextPageURL + "?planet=" + nextPlanetImage + "&title=" + encodeURIComponent(nextTitle) + "&difficulty=" + nextDifficulty;
+    }
+
+    // Establece la imagen de fondo y el título según el parámetro 'planet' en la URL
+    document.body.style.backgroundImage = 'url("./fotos/<?php echo $planetParam; ?>")';
+    document.title = "<?php echo $currentTitle; ?>";
+    document.getElementById("planetTitle").innerText = "<?php echo $currentTitle; ?>";
+
+    // Mostrar el nivel de dificultad actual
+    var currentDifficulty = "<?php echo $currentDifficulty; ?>";
+    document.getElementById("planetDifficulty").innerText = "Nivel de dificultad: " + currentDifficulty;
+
+  function playAgain() {
+    window.location.href = 'index.html';
   }
-
-  // Establece la imagen de fondo y el título según el parámetro 'planet' en la URL
-  document.body.style.backgroundImage = 'url("./fotos/<?php echo $planetParam; ?>")';
-  document.title = "<?php echo $currentTitle; ?>";
-  document.getElementById("planetTitle").innerText = "<?php echo $currentTitle; ?>";
-
-  // También podrías mostrar el nivel de dificultad actual en tu interfaz si lo deseas
-  var currentDifficulty = "<?php echo $currentDifficulty; ?>";
-  document.getElementById("planetDifficulty").innerText = "Nivel de dificultad: " + currentDifficulty;
-
 
     function showIncorrectAnswer() {
         document.getElementById("correctAnswerdiv").style.display = "none";

@@ -1,15 +1,28 @@
-
+html,
+body {
+  text-align: center;
+  background-color: rgb(36, 36, 36);
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 #correctAnswerdiv {
-  display: none; /* Inicialmente oculto */
+  display: none;
+  /* Inicialmente oculto */
   font-size: 40px;
 }
 
 #incorrectAnswerdiv {
-  display: none; /* Inicialmente oculto */
+  display: none;
+  /* Inicialmente oculto */
   font-size: 40px;
 }
-
 
 header {
   height: 100px;
@@ -23,7 +36,15 @@ header {
   border-radius: 20px;
 }
 
-
+main {
+  margin-top: 20px;
+  height: 100%;
+  width: 80%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .question {
   margin: 20px;
@@ -49,17 +70,130 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 100px; /* Ajusta el margen según tu diseño */
-  color: rgb(255, 255, 255); /* Texto blanco para contrastar con el fondo negro */
-  background-color: rgba(0, 0, 0, 0.6); /* Negro con 70% de opacidad */
-  border: none;
+  margin: 20px 100px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.6);
+  font-weight: semibold;
+  padding: 1rem 1.5rem;
+  border: 2px solid #eee;
   cursor: pointer;
-  width: calc(50% - 200px); /* Ajusta el ancho según tu diseño y margen */
-  height: 150px; /* Ajusta la altura según tu diseño */
-  font-size: 3em; /* Utilizando em para que se adapte al tamaño del botón */
-  border-radius: 20px;
+  transition: all 1s ease;
+  box-shadow: .5rem .5rem 1rem #ccc,
+  -.5rem -.5rem 1rem #fff;
+  width: calc(50% - 200px);
+  height: 150px;
+  font-size: 3em;
+  border-radius: .5rem;
 }
 
+.option:hover {
+  box-shadow: .5rem .5rem 1rem #fff,
+  -.5rem -.5rem 1rem #ccc
+}
+
+.option:active {
+  box-shadow: inset .2rem .2rem 1rem #ccc,
+  inset -.2rem -.2rem 1rem #fff;
+  transform: scale(0.9);
+}
+
+#correct {
+  --glow-color: rgb(176, 255, 183);
+  --glow-spread-color: rgba(123, 255, 191, 0.781);
+  --enhanced-glow-color: rgb(206, 255, 231);
+  --btn-color: rgb(61, 136, 100);
+  border: 0.25em solid var(--glow-color); 
+  padding: 1em 3em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  box-shadow: 0 0 1em 0.25em var(--glow-color), 
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 0.75em 0.25em var(--glow-color);
+  text-shadow: 0 0 0.5em var(--glow-color); 
+  position: relative;
+  transition: all 0.3s;
+}
+
+#correct::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width:100%;
+  background-color: var(--glow=spred-color);
+  filter: blur(2em);
+  opacity: 0.7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0,6);
+}
+
+#correct:hover {
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+  0 0 4em 2em var(--glow-spread-color),
+  inset 0 0 0.75 0.25em var(--glow-color);
+}
+
+#correct:active { 
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+  0 0 2.5em 2em var(--glow-spread-color),
+  inset 0 0 0.5em 0.25em var(--glow-color);
+}
+
+#incorrect {
+  --glow-color: rgb(255, 176, 183);
+  --glow-spread-color: rgba(255, 191, 123, 0.781);
+  --enhanced-glow-color: rgb(255, 206, 231);
+  --btn-color: rgb(136, 61, 100);
+  border: 0.25em solid var(--glow-color); 
+  padding: 1em 3em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  box-shadow: 0 0 1em 0.25em var(--glow-color), 
+        0 0 4em 1em var(--glow-spread-color),
+        inset 0 0 0.75em 0.25em var(--glow-color);
+  text-shadow: 0 0 0.5em var(--glow-color); 
+  position: relative;
+  transition: all 0.3s;
+}
+
+#incorrect::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width:100%;
+  background-color: var(--glow=spred-color);
+  filter: blur(2em);
+  opacity: 0.7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0,6);
+}
+
+#incorrect:hover {
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+  0 0 4em 2em var(--glow-spread-color),
+  inset 0 0 0.75 0.25em var(--glow-color);
+}
+
+#incorrect:active { 
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+  0 0 2.5em 2em var(--glow-spread-color),
+  inset 0 0 0.5em 0.25em var(--glow-color);
+}
 
 .result {
   margin: 20px;
