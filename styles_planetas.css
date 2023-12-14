@@ -27,7 +27,7 @@ body {
 header {
   height: 100px;
   width: 100%;
-  color: #ffb13a;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ main {
   margin-top: 20px;
   height: 100%;
   width: 80%;
-  color: #ffb13a;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +52,7 @@ main {
 }
 
 .text {
-  color: #ffb13a;
+  color: white;
   font-size: 30px;
 }
 
@@ -71,7 +71,7 @@ main {
   align-items: center;
   justify-content: center;
   margin: 20px 100px;
-  color: #ffb13a;
+  color: white;
   background-color: rgba(0, 0, 0, 0.6);
   font-weight: semibold;
   padding: 1rem 1.5rem;
