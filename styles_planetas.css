@@ -24,6 +24,13 @@ body {
   font-size: 40px;
 }
 
+#finalAnswerdiv {
+  margin-top: 15px;
+  display: none;
+  /* Inicialmente oculto */
+  font-size: 40px;
+}
+
 header {
   height: 100px;
   width: 100%;
@@ -79,7 +86,7 @@ main {
   cursor: pointer;
   transition: all 1s ease;
   box-shadow: .5rem .5rem 1rem #ccc,
-  -.5rem -.5rem 1rem #fff;
+    -.5rem -.5rem 1rem #fff;
   width: calc(50% - 200px);
   height: 150px;
   font-size: 3em;
@@ -88,12 +95,12 @@ main {
 
 .option:hover {
   box-shadow: .5rem .5rem 1rem #fff,
-  -.5rem -.5rem 1rem #ccc;
+    -.5rem -.5rem 1rem #ccc;
 }
 
 .option:active {
   box-shadow: inset .2rem .2rem 1rem #ccc,
-  inset -.2rem -.2rem 1rem #fff;
+    inset -.2rem -.2rem 1rem #fff;
   transform: scale(0.9);
 }
 
@@ -102,7 +109,7 @@ main {
   --glow-spread-color: rgba(123, 255, 191, 0.781);
   --enhanced-glow-color: rgb(206, 255, 231);
   --btn-color: rgb(61, 136, 100);
-  border: 0.25em solid var(--glow-color); 
+  border: 0.25em solid var(--glow-color);
   padding: 1em 3em;
   color: var(--glow-color);
   font-size: 15px;
@@ -110,10 +117,10 @@ main {
   background-color: var(--btn-color);
   border-radius: 1em;
   outline: none;
-  box-shadow: 0 0 1em 0.25em var(--glow-color), 
-        0 0 4em 1em var(--glow-spread-color),
-        inset 0 0 0.75em 0.25em var(--glow-color);
-  text-shadow: 0 0 0.5em var(--glow-color); 
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+    0 0 4em 1em var(--glow-spread-color),
+    inset 0 0 0.75em 0.25em var(--glow-color);
+  text-shadow: 0 0 0.5em var(--glow-color);
   position: relative;
   transition: all 0.3s;
 }
@@ -125,25 +132,25 @@ main {
   top: 120%;
   left: 0;
   height: 100%;
-  width:100%;
+  width: 100%;
   background-color: var(--glow=spred-color);
   filter: blur(2em);
   opacity: 0.7;
-  transform: perspective(1.5em) rotateX(35deg) scale(1, 0,6);
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0, 6);
 }
 
 #correct:hover {
   color: var(--btn-color);
   background-color: var(--glow-color);
   box-shadow: 0 0 1em 0.25em var(--glow-color),
-  0 0 4em 2em var(--glow-spread-color),
-  inset 0 0 0.75 0.25em var(--glow-color);
+    0 0 4em 2em var(--glow-spread-color),
+    inset 0 0 0.75 0.25em var(--glow-color);
 }
 
-#correct:active { 
+#correct:active {
   box-shadow: 0 0 0.6em 0.25em var(--glow-color),
-  0 0 2.5em 2em var(--glow-spread-color),
-  inset 0 0 0.5em 0.25em var(--glow-color);
+    0 0 2.5em 2em var(--glow-spread-color),
+    inset 0 0 0.5em 0.25em var(--glow-color);
 }
 
 #incorrect {
@@ -151,7 +158,7 @@ main {
   --glow-spread-color: rgba(255, 191, 123, 0.781);
   --enhanced-glow-color: rgb(255, 206, 231);
   --btn-color: rgb(136, 61, 100);
-  border: 0.25em solid var(--glow-color); 
+  border: 0.25em solid var(--glow-color);
   padding: 1em 3em;
   color: var(--glow-color);
   font-size: 15px;
@@ -159,10 +166,10 @@ main {
   background-color: var(--btn-color);
   border-radius: 1em;
   outline: none;
-  box-shadow: 0 0 1em 0.25em var(--glow-color), 
-        0 0 4em 1em var(--glow-spread-color),
-        inset 0 0 0.75em 0.25em var(--glow-color);
-  text-shadow: 0 0 0.5em var(--glow-color); 
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+    0 0 4em 1em var(--glow-spread-color),
+    inset 0 0 0.75em 0.25em var(--glow-color);
+  text-shadow: 0 0 0.5em var(--glow-color);
   position: relative;
   transition: all 0.3s;
 }
@@ -174,25 +181,74 @@ main {
   top: 120%;
   left: 0;
   height: 100%;
-  width:100%;
+  width: 100%;
   background-color: var(--glow=spred-color);
   filter: blur(2em);
   opacity: 0.7;
-  transform: perspective(1.5em) rotateX(35deg) scale(1, 0,6);
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0, 6);
 }
 
 #incorrect:hover {
   color: var(--btn-color);
   background-color: var(--glow-color);
   box-shadow: 0 0 1em 0.25em var(--glow-color),
-  0 0 4em 2em var(--glow-spread-color),
-  inset 0 0 0.75 0.25em var(--glow-color);
+    0 0 4em 2em var(--glow-spread-color),
+    inset 0 0 0.75 0.25em var(--glow-color);
 }
 
-#incorrect:active { 
+#incorrect:active {
   box-shadow: 0 0 0.6em 0.25em var(--glow-color),
-  0 0 2.5em 2em var(--glow-spread-color),
-  inset 0 0 0.5em 0.25em var(--glow-color);
+    0 0 2.5em 2em var(--glow-spread-color),
+    inset 0 0 0.5em 0.25em var(--glow-color);
+}
+
+#final {
+  --glow-color: rgb(176, 183, 255);
+  --glow-spread-color: rgba(123, 191, 255, 0.781);
+  --enhanced-glow-color: rgb(206, 231, 255);
+  --btn-color: rgb(61, 100, 136);
+  border: 0.25em solid var(--glow-color);
+  padding: 1em 3em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+    0 0 4em 1em var(--glow-spread-color),
+    inset 0 0 0.75em 0.25em var(--glow-color);
+  text-shadow: 0 0 0.5em var(--glow-color);
+  position: relative;
+  transition: all 0.3s;
+}
+
+#final::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--glow=spred-color);
+  filter: blur(2em);
+  opacity: 0.7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0, 6);
+}
+
+#final:hover {
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+    0 0 4em 2em var(--glow-spread-color),
+    inset 0 0 0.75 0.25em var(--glow-color);
+}
+
+#final:active {
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+    0 0 2.5em 2em var(--glow-spread-color),
+    inset 0 0 0.5em 0.25em var(--glow-color);
 }
 
 .result {

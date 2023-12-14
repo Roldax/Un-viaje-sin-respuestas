@@ -37,7 +37,7 @@ p {
   max-width: 1080px;
   height: 800px;
   transform: perspective(200px) rotateX(14deg);
-  animation: intro 40s linear infinite;
+  animation: intro 50s linear infinite;
 }
 
 .star-wars :is(h2, p) {
@@ -49,9 +49,11 @@ p {
     transform: perspective(200px) rotateX(14deg) translateY(800px);
     opacity: 1;
   }
+
   60% {
     opacity: 0.5;
   }
+
   100% {
     transform: perspective(200px) rotateX(20deg) translateY(-1000px);
     opacity: 0;
@@ -93,4 +95,3 @@ button:hover span {
 button:active {
   transform: scale(0.9);
 }
-

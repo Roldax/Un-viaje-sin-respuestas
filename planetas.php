@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEPTUNO</title>
-  <link rel="stylesheet" type="text/css" href="styles_planetas.css">
-  <style>
 
-  </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEPTUNO</title>
+    <link rel="stylesheet" type="text/css" href="styles_planetas.css">
+    <style>
+
+    </style>
 </head>
+
 <body>
 
-<?php
+    <?php
     $planets = array("neptuno.jpg", "urano.jpg", "saturno.jpg", "jupiter.jpg", "marte.jpg", "tierra.jpg");
 
     // Verifica si hay un parámetro 'planet' en la URL y establece la imagen de fondo en consecuencia
@@ -45,7 +47,7 @@
 
     // Selecciona preguntas aleatorias del nivel de dificultad actual
     $host = 'localhost';
-    $db   = 'viaje_respuestas';
+    $db = 'viaje_respuestas';
     $user = 'root';
     $pass = 'password';
 
@@ -83,101 +85,135 @@
         $options = [];
         $correctAnswer = "";
     }
-?>
 
-<main>
-  <header>
-    <h1 id="planetTitle">Neptuno</h1>
-  </header>
 
-    <div class="question">
-        <h1>Pregunta:</h1>
-        <p><?php echo $question; ?></p>
-        <p id="planetDifficulty"></p>
-    </div>
-
-    <div class="options">
-    <?php
-    for ($i = 0; $i < count($options); $i++) {
-        // Agregar un evento onclick para llamar a la función correspondiente
-        $isCorrect = (strpos($options[$i], $correctAnswer) !== false);
-        $onClickFunction = $isCorrect ? 'showCorrectAnswer()' : 'showIncorrectAnswer()';
-        
-        // Agregar la condición para deshabilitar el botón si el usuario ya respondió
-        echo '<button class="option" onclick="' . $onClickFunction . '" ' . ($userAnswered ? 'disabled' : '') . '>' . $options[$i] . '</button>';
-    }
     ?>
-    </div>
 
-    <div id="correctAnswerdiv">
-        <p>Tu respuesta es correcta.</p>
-        <button id="correct" onclick="nextPlanet()">Siguiente Planeta</button>
-    </div>
-    <div id="incorrectAnswerdiv">
-        <p>Tu respuesta es incorrecta, la respuesta correcta era: <?php echo $correctAnswer; ?>.</p>
-        <button id="incorrect" onclick="playAgain()">Jugar Nuevamente</button>
-    </div>
-  </main>
+    <main>
+        <header>
+            <h1 id="planetTitle">Neptuno</h1>
+        </header>
 
-<script>
+        <div class="question">
+            <h1>Pregunta:</h1>
+            <p>
+                <?php echo $question; ?>
+            </p>
+        </div>
 
-    // Función para redirigir a la misma página con la nueva imagen de fondo y preguntas
-    function nextPlanet() {
-        var planets = <?php echo json_encode($planets); ?>;
-        var currentPlanet = "<?php echo $planetParam; ?>";
+        <div class="options">
+            <?php
+            for ($i = 0; $i < count($options); $i++) {
+                // Agregar un evento onclick para llamar a la función correspondiente
+                $isCorrect = (strpos($options[$i], $correctAnswer) !== false);
 
-        // Encuentra el índice actual en el array
-        var currentIndex = planets.indexOf(currentPlanet);
+                if ($planetParam === "tierra.jpg" && $isCorrect) {
+                    // Si está en el planeta Tierra y la respuesta es correcta, muestra showFinalAnswer
+                    $onClickFunction = 'showFinalAnswer()';
+                } else {
+                    // En otros casos, muestra showCorrectAnswer o showIncorrectAnswer según sea necesario
+                    $onClickFunction = $isCorrect ? 'showCorrectAnswer()' : 'showIncorrectAnswer()';
+                }
 
-        // Incrementa el índice y asegúrate de no exceder el límite del array
-        currentIndex = (currentIndex + 1) % planets.length;
+                // Agregar la condición para deshabilitar el botón si el usuario ya respondió
+                echo '<button class="option" onclick="' . $onClickFunction . '" ' . ($userAnswered ? 'disabled' : '') . '>' . $options[$i] . '</button>';
+            }
+            ?>
+        </div>
 
-        var nextPlanetImage = planets[currentIndex];
-        var nextTitle = "<?php echo $planetTitles[$planetParam]; ?>";
-        var nextDifficulty = "<?php echo $planetDifficulty[$planetParam]; ?>";
-        var nextPageURL = window.location.href.split('?')[0]; // Obtén la URL actual sin parámetros
-        window.location.href = nextPageURL + "?planet=" + nextPlanetImage + "&title=" + encodeURIComponent(nextTitle) + "&difficulty=" + nextDifficulty;
-    }
+        <div id="correctAnswerdiv">
+            <p>Tu respuesta es correcta, consigues avanzar de planeta</p>
+            <button id="correct" onclick="nextPlanet()">Siguiente Planeta</button>
+        </div>
 
-    // Establece la imagen de fondo y el título según el parámetro 'planet' en la URL
-    document.body.style.backgroundImage = 'url("./fotos/<?php echo $planetParam; ?>")';
-    document.title = "<?php echo $currentTitle; ?>";
-    document.getElementById("planetTitle").innerText = "<?php echo $currentTitle; ?>";
+        <div id="incorrectAnswerdiv">
+            <p>Tu respuesta es incorrecta, la respuesta correcta era:
+                <?php echo $correctAnswer; ?>
+            </p>
+            <button id="incorrect" onclick="playAgain()">Jugar Nuevamente</button>
+        </div>
 
-    // Mostrar el nivel de dificultad actual
-    var currentDifficulty = "<?php echo $currentDifficulty; ?>";
-    document.getElementById("planetDifficulty").innerText = "Nivel de dificultad: " + currentDifficulty;
+        <div id="finalAnswerdiv">
+            <p>Tu respuesta es correcta, has conseguido superar la aventura.</p>
+            <button id="final" onclick="finalPage()">FINAL</button>
+        </div>
 
-  function playAgain() {
-    window.location.href = 'index.html';
-  }
+        <p id="planetDifficulty" style="position: absolute; bottom: 10px; left: 10px;">
+            <?php echo "Nivel de dificultad: " . ucfirst(str_replace("Preguntas_", "", $currentDifficulty)); ?>
+        </p>
 
-    function showIncorrectAnswer() {
-        document.getElementById("correctAnswerdiv").style.display = "none";
-        document.getElementById("incorrectAnswerdiv").style.display = "block";
-        disableButtons();
-    }
+    </main>
 
-    function showCorrectAnswer() {
-        document.getElementById("incorrectAnswerdiv").style.display = "none";
-        document.getElementById("correctAnswerdiv").style.display = "block";
-        disableButtons();
-    }
+    <script>
 
-    function disableButtons() {
-        var buttons = document.getElementsByClassName("option");
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].disabled = true;
+        function nextPlanet() {
+            var planets = <?php echo json_encode($planets); ?>;
+            var currentPlanet = "<?php echo $planetParam; ?>";
+
+            // Encuentra el índice actual en el array
+            var currentIndex = planets.indexOf(currentPlanet);
+
+            // Incrementa el índice y asegúrate de no exceder el límite del array
+            currentIndex = (currentIndex + 1) % planets.length;
+
+            var nextPlanetImage = planets[currentIndex];
+            var nextTitle = "<?php echo $planetTitles[$planetParam]; ?>";
+            var nextDifficulty = "<?php echo $planetDifficulty[$planetParam]; ?>";
+            var nextPageURL = window.location.href.split('?')[0]; // Obtén la URL actual sin parámetros
+            window.location.href = nextPageURL + "?planet=" + nextPlanetImage + "&title=" + encodeURIComponent(nextTitle) + "&difficulty=" + nextDifficulty;
         }
-        
-        // Actualizar la variable para rastrear si el usuario ha respondido
-        <?php echo $userAnswered = true; ?>;
-    }
 
-    
 
-</script>
+
+        // Establece la imagen de fondo y el título según el parámetro 'planet' en la URL
+        document.body.style.backgroundImage = 'url("./fotos/<?php echo $planetParam; ?>")';
+        document.title = "<?php echo $currentTitle; ?>";
+        document.getElementById("planetTitle").innerText = "<?php echo $currentTitle; ?>";
+
+        // Mostrar el nivel de dificultad actual
+        var currentDifficulty = "<?php echo $currentDifficulty; ?>";
+        document.getElementById("planetDifficulty").innerText = "Nivel de dificultad: " + currentDifficulty;
+
+        function playAgain() {
+            window.location.href = 'planetas.php';
+        }
+
+        function showIncorrectAnswer() {
+            document.getElementById("correctAnswerdiv").style.display = "none";
+            document.getElementById("incorrectAnswerdiv").style.display = "block";
+            disableButtons();
+        }
+
+        function showCorrectAnswer() {
+            document.getElementById("incorrectAnswerdiv").style.display = "none";
+            document.getElementById("correctAnswerdiv").style.display = "block";
+            disableButtons();
+        }
+
+        function showFinalAnswer() {
+            document.getElementById("incorrectAnswerdiv").style.display = "none";
+            document.getElementById("correctAnswerdiv").style.display = "none";
+            document.getElementById("finalAnswerdiv").style.display = "block";
+            disableButtons();
+        }
+
+        function disableButtons() {
+            var buttons = document.getElementsByClassName("option");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+            }
+
+            // Actualizar la variable para rastrear si el usuario ha respondido
+            <?php echo $userAnswered = true; ?>;
+        }
+
+        function finalPage() {
+            window.location.href = "end.html";
+        }
+
+
+    </script>
 
 </body>
-</html>
 
+</html>
