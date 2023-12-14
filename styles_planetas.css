@@ -27,7 +27,7 @@ body {
 header {
   height: 100px;
   width: 100%;
-  color: rgb(255, 255, 255);
+  color: #ffb13a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ main {
   margin-top: 20px;
   height: 100%;
   width: 80%;
-  color: white;
+  color: #ffb13a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +52,7 @@ main {
 }
 
 .text {
-  color: white;
+  color: #ffb13a;
   font-size: 30px;
 }
 
@@ -71,7 +71,7 @@ main {
   align-items: center;
   justify-content: center;
   margin: 20px 100px;
-  color: rgb(255, 255, 255);
+  color: #ffb13a;
   background-color: rgba(0, 0, 0, 0.6);
   font-weight: semibold;
   padding: 1rem 1.5rem;
@@ -88,7 +88,7 @@ main {
 
 .option:hover {
   box-shadow: .5rem .5rem 1rem #fff,
-  -.5rem -.5rem 1rem #ccc
+  -.5rem -.5rem 1rem #ccc;
 }
 
 .option:active {
